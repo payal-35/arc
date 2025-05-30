@@ -63,7 +63,7 @@ export default function AdminSignup() {
     }
 
     try {
-      const response = await fetch("/api/admin/signup", {
+      const response = await fetch("http://183.83.220.58:20021/api/v1/auth/admin/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

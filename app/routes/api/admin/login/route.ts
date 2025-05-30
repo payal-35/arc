@@ -1,13 +1,11 @@
 import type { ActionFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 
 export const action: ActionFunction = async ({ request }) => {
   try {
     const { email, password } = await request.json();
 
-    /*
-    // Call your Go backend API
-    const response = await fetch(`${process.env.API_URL}/admin/login`, {
+    const response = await fetch(`http://183.83.220.58:20021/api/v1/auth/organization/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,13 +23,10 @@ export const action: ActionFunction = async ({ request }) => {
 
     const data = await response.json();
 
-    // Get the auth_token cookie from the backend response
     const cookies = response.headers.get("set-cookie");
 
-    // Create response JSON with data from backend
     const headers: HeadersInit = {};
     if (cookies) {
-      // Forward the set-cookie header to the client
       headers["Set-Cookie"] = cookies;
     }
 
@@ -42,13 +37,6 @@ export const action: ActionFunction = async ({ request }) => {
       },
       { headers }
     );
-    */
-
-    // Temporary mock success response for frontend rendering
-    return json({
-      expiresIn: 3600,
-      tenantId: "mock-tenant-id",
-    });
   } catch (error) {
     console.error("Login error:", error);
     return json({ message: "Internal server error" }, { status: 500 });

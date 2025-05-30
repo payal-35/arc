@@ -3,16 +3,13 @@ import { json } from "@remix-run/node";
 
 export const loader: LoaderFunction = async ({ request }) => {
   try {
-    /*
-    // Uncomment this when backend is ready
-    const cookie = request.headers.get("Cookie");
+    const cookie = request.headers.get("Cookie"); 
 
-    const response = await fetch(`${process.env.API_URL}/user/me`, {
+    const response = await fetch(`http://183.83.220.58:20021/api/v1/auth/user/me`, {
       method: "GET",
       headers: {
         Cookie: cookie ?? "",
       },
-      credentials: "include",
     });
 
     if (!response.ok) {
@@ -21,16 +18,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     const data = await response.json();
     return json(data);
-    */
-
-    // Mocked user data while backend is disabled
-    return json({
-      userId: "mock-user-id",
-      email: "mockuser@example.com",
-      name: "Mock User",
-      phone: "1234567890",
-      tenants: [{ id: "tenant1", name: "Tenant One" }],
-    });
   } catch (error) {
     console.error("Get user info error:", error);
     return json({ message: "Internal server error" }, { status: 500 });

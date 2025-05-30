@@ -9,6 +9,7 @@ import { Label } from "~/components/ui/label"
 import { Switch } from "~/components/ui/switch"
 import CountUp from 'react-countup';
 
+import { useLoaderData } from "@remix-run/react";
 
 import {
   Select,
@@ -89,6 +90,18 @@ const mockUserInfo = {
   created_at: "2023-01-15T10:30:00Z",
   profile_image: "/professional-headshot.png",
 }
+
+type UserInfo = {
+  user_id: string;
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  created_at: string;
+  profile_image: string;
+}
+
+
 interface RequestHistoryItem {
   date: string; // or Date, depending on your data
   status: string;
@@ -408,6 +421,9 @@ export default function UserDashboard() {
   const [saving, setSaving] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false)
+
+
+  const user = useLoaderData<UserInfo>();
 
 
   // State for consents
@@ -937,8 +953,11 @@ const activeCount = consents.filter((c) => c.status).length;
           {activeTab === "overview" && (
   <div className="space-y-6">
     <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-      Welcome, {mockUserInfo.name}
-    </h2>
+     
+  Welcome, {user?.name ?? "User"}
+</h2>
+
+
 
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {/* Active Consents */}

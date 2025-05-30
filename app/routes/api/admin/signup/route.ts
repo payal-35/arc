@@ -1,15 +1,11 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
-
 export const action: ActionFunction = async ({ request }) => {
   try {
     const { email, name, phone, password, role } = await request.json();
 
-    // Commented-out actual API call for now to prevent frontend errors
-    /*
-    const response = await fetch(`${API_URL}/admin/signup`, {
+    const response = await fetch("http://183.83.220.58:20021/api/v1/auth/admin/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,15 +28,7 @@ export const action: ActionFunction = async ({ request }) => {
       user_id: data.user_id,
       message: data.message,
     });
-    */
 
-    // Mocked successful response
-    console.log("Mock signup payload:", { email, name, phone, password, role });
-    return json({
-      tenant_id: "mock-tenant-id",
-      user_id: "mock-user-id",
-      message: "Signup successful (mock)",
-    });
   } catch (error) {
     console.error("Signup error:", error);
     return json({ message: "Internal server error" }, { status: 500 });

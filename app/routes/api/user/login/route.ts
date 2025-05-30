@@ -5,9 +5,7 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const { email, password } = await request.json();
 
-    /*
-    // Uncomment this block when backend is ready
-    const response = await fetch(`${process.env.API_URL}/auth/user/login`, {
+    const response = await fetch("http://183.83.220.58:20021/api/v1/auth/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,21 +39,6 @@ export const action: ActionFunction = async ({ request }) => {
     }
 
     return remixResponse;
-    */
-
-    // Mocked login success response
-    return json(
-      {
-        userId: "mock-user-id",
-        email,
-        phone: "+1234567890",
-        tenants: [
-          { id: "tenant-1", name: "Tenant One" },
-          { id: "tenant-2", name: "Tenant Two" },
-        ],
-      },
-      { status: 200 }
-    );
   } catch (error) {
     console.error("Login error:", error);
     return json({ message: "Internal server error" }, { status: 500 });

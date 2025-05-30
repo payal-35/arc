@@ -45,40 +45,32 @@ export default function UserLogin() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  e.preventDefault();
+  setLoading(true);
+  setError("");
 
-    /*
-    try {
-      const response = await fetch("/api/user/login", {  // changed API endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const response = await fetch("http://183.83.220.58:20021/api/v1/auth/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Invalid credentials");
-      }
-
-      // Redirect to user dashboard
-      navigate("/dashboard");  // changed redirect path
-    } catch (err: any) {
-      setError(err.message || "Login failed. Please try again.");
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Invalid credentials");
     }
-    */
 
-    // Simulate loading and success redirect
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/user/dashboard"); 
-    }, 1500);
-  };
+    navigate("/user/dashboard"); 
+  } catch (err: any) {
+    setError(err.message || "Login failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 via-white to-pink-50 dark:from-purple-950/30 dark:via-background dark:to-pink-950/30 p-4">
@@ -183,7 +175,7 @@ export default function UserLogin() {
               <div className="text-center text-sm">
                 {t("Don't have an account?")}{" "}
                 <Link
-                  to="/signup"
+                  to="/user/signup"
                   className="text-purple-500 hover:text-purple-600 dark:text-purple-400 dark:hover:text-purple-300 hover:underline"
                 >
                   {t("Sign Up")}

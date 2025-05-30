@@ -25,6 +25,7 @@ export default defineConfig({
 
           // User login route
           route("/user/login", "routes/user/login/page.tsx");
+          
           route("/user/signup", "routes/user/signup/page.tsx");
           route("/user/dashboard", "routes/user/dashboard/page.tsx")
           // Admin login route

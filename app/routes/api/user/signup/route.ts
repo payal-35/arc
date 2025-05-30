@@ -1,6 +1,5 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-
 export const action: ActionFunction = async ({ request }) => {
   try {
     const {
@@ -13,8 +12,7 @@ export const action: ActionFunction = async ({ request }) => {
       password,
     } = await request.json();
 
-    /*
-    const response = await fetch(`${process.env.API_URL}/auth/user/signup`, {
+    const response= await fetch("http://183.83.220.58:20021/api/v1/auth/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,13 +42,7 @@ export const action: ActionFunction = async ({ request }) => {
       user_id: data.user_id,
       message: data.message,
     });
-    */
 
-    // Mock success response while backend is disabled
-    return json({
-      user_id: "mock-user-id-123",
-      message: "Signup successful (mock response)",
-    });
   } catch (error) {
     console.error("Signup error:", error);
     return json({ message: "Internal server error" }, { status: 500 });

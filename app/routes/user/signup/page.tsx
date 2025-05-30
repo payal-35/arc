@@ -5,7 +5,6 @@ import {
 } from "lucide-react"
 import { motion } from "framer-motion"
 import { ARCLogo } from "~/components/arc-logo"
-
 import { ModeToggle } from "~/components/mode-toggle"
 import {
   Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
@@ -56,15 +55,15 @@ export default function UserSignup() {
     setLoading(true)
 
     try {
-      const response = await fetch("/api/user/signup", {
+      const response = await fetch("http://183.83.220.58:20021/api/v1/auth/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: formData.email,
-          first_name: formData.firstName,
-          last_name: formData.lastName,
+          first_name: formData.firstName,  
+         last_name: formData.lastName, 
           phone: formData.phone,
           age: Number(formData.age),
           location: formData.location,
@@ -88,7 +87,6 @@ export default function UserSignup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 via-white to-indigo-50 dark:from-blue-950/30 dark:via-background dark:to-indigo-950/30 p-4">
       <div className="absolute top-4 right-4 flex items-center gap-2">
-        
         <ModeToggle />
       </div>
 
